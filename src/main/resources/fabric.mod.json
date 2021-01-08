@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "gatewayer",
+  "version": "${version}",
+
+  "name": "Gatewayer",
+  "description": "A mod to show some information of an end gateway.",
+  "authors": [
+    "Ivan-YF"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Ivan-YFw/Gatewayer",
+    "sources": "https://github.com/Ivan-YFw/Gatewayer"
+  },
+
+  "license": "GPL-3.0",
+  "icon": "assets/gatewayer/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "gatewayer.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
