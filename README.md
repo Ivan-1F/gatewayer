@@ -14,6 +14,8 @@ It will show:
 
 It's a client side only mod.
 
+![screenshot](https://raw.githubusercontent.com/Ivan-YFw/Gatewayer/fabric-1.15.2/screenshot.png)
+
 ## License
 
 License under GPL-3.0.
