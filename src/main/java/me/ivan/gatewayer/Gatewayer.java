@@ -53,7 +53,9 @@ public class Gatewayer {
         return ActionResult.FAIL;
     }
 
-    public void renderInfo(float tickDelta, Camera camera) {
+    public void renderInfo(float tickDelta) {
+        MinecraftClient mc = MinecraftClient.getInstance();
+        Camera camera = mc.gameRenderer.getCamera();
         if (gatewayInfo.isEnabled() && camera.getPos().squaredDistanceTo(new Vec3d(gatewayInfo.getPos().getX(), gatewayInfo.getPos().getY(), gatewayInfo.getPos().getZ())) < MAX_RENDER_DISTANCE * MAX_RENDER_DISTANCE) {
             BlockPos gatewayPos = gatewayInfo.getPos();
             BlockPos entityExitPos = gatewayInfo.getEntityExitPos();

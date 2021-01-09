@@ -25,7 +25,7 @@ public class WorldRendererMixin {
     )
     private void renderGatewayer(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci)
     {
-        Gatewayer.getInstance().renderInfo(tickDelta, camera);
+        Gatewayer.getInstance().renderInfo(tickDelta);
     }
 
 
