@@ -6,8 +6,6 @@ import me.ivan.gatewayer.utils.GatewayInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EndGatewayBlock;
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
