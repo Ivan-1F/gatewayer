@@ -2,8 +2,8 @@ package me.ivan.gatewayer.mixin;
 
 import me.ivan.gatewayer.Gatewayer;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,9 +18,9 @@ public class WorldRendererMixin {
     @Inject(
             method = "render",
             at = @At(
-                    value = "INVOKE_STRING",
-                    args = "ldc=weather",
-                    target = "Lnet/minecraft/util/profiler/Profiler;swap(Ljava/lang/String;)V"
+                    value = "INVOKE",
+                    ordinal = 1,
+                    target = "Lnet/minecraft/client/render/WorldRenderer;renderWeather(Lnet/minecraft/client/render/LightmapTextureManager;FDDD)V"
             )
     )
     private void renderGatewayer(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci)

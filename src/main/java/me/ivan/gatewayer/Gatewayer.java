@@ -9,8 +9,7 @@ import net.minecraft.block.EndGatewayBlock;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.client.util.math.Rotation3;
+import net.minecraft.client.util.math.AffineTransformation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.TranslatableText;
@@ -19,6 +18,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -66,7 +66,7 @@ public class Gatewayer {
             GlStateManager.enableBlend();
 
             // Draw lines
-            drawBoxSides(gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, new Color(176, 93, 255, 50), 5, camera);
+            // drawBoxSides(gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, new Color(176, 93, 255, 50), 5, camera);
             drawBoxOutlined(gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, new Color(128, 56, 201, 255), 5, camera);
             drawBoxOutlined(entityExitPos.getX(), entityExitPos.getY(), entityExitPos.getZ(), entityExitPos.getX() + 1, entityExitPos.getY() + 1, entityExitPos.getZ() + 1, new Color(0, 162, 232, 255), 5, camera);
 
@@ -172,8 +172,7 @@ public class Gatewayer {
     {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = client.gameRenderer.getCamera();
-        if (camera.isReady() && client.getEntityRenderManager().gameOptions != null && client.player != null)
-        {
+        if (camera.isReady() && client.getEntityRenderDispatcher().gameOptions != null && client.player != null) {
             double x = (double)pos.getX() + 0.5D;
             double y = (double)pos.getY() + 0.5D;
             double z = (double)pos.getZ() + 0.5D;
@@ -196,9 +195,9 @@ public class Gatewayer {
             RenderSystem.enableAlphaTest();
 
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-            float renderX = -client.textRenderer.getStringWidth(text) * 0.5F;
+            float renderX = -client.textRenderer.getWidth(text) * 0.5F;
             float renderY = client.textRenderer.getStringBoundedHeight(text, Integer.MAX_VALUE) * (-0.5F + 1.25F * line);
-            Matrix4f matrix4f = Rotation3.identity().getMatrix();
+            Matrix4f matrix4f = AffineTransformation.identity().getMatrix();
             client.textRenderer.draw(text, renderX, renderY, color, false, matrix4f, immediate, true, 0, 0xF000F0);
             immediate.draw();
 
@@ -207,5 +206,4 @@ public class Gatewayer {
             RenderSystem.popMatrix();
         }
     }
-
 }

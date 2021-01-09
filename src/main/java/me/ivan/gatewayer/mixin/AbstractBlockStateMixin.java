@@ -1,6 +1,7 @@
 package me.ivan.gatewayer.mixin;
 
 import me.ivan.gatewayer.Gatewayer;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
@@ -12,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BlockState.class)
-public class BlockStateMixin {
+@Mixin(AbstractBlock.AbstractBlockState.class)
+public class AbstractBlockStateMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void onPlayerRightClickBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (world.isClient) {
