@@ -2,6 +2,7 @@ package me.ivan.gatewayer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.ivan.gatewayer.mixin.EndGatewayBlockEntityAccessor;
 import me.ivan.gatewayer.utils.GatewayInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,7 +13,6 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.client.util.math.Rotation3;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -76,16 +76,20 @@ public class Gatewayer {
 
             if (gatewayInfo.hasBlockEntity()) {
                 EndGatewayBlockEntity gateway = gatewayInfo.getBlockEntity();
-                CompoundTag tag = new CompoundTag();
-                gateway.toTag(tag);
-                if (tag.contains("ExitPortal")) {
-                    drawString(new TranslatableText("gatewayer.exit_portal", tag.get("ExitPortal").toString()).getString().replace("{", "").replace("}", ""), gatewayInfo.getPos(), tickDelta, Formatting.DARK_GREEN.getColorValue(), currentLine ++);
+                BlockPos exitPortalPos = ((EndGatewayBlockEntityAccessor) gateway).getExitPortalPos();
+                boolean exactTeleport = ((EndGatewayBlockEntityAccessor) gateway).getExactTeleport();
+                int teleportCooldown = ((EndGatewayBlockEntityAccessor) gateway).getTeleportCooldown();
+                if (exitPortalPos != null) {
+                    drawString(new TranslatableText("gatewayer.exit_portal", exitPortalPos.toShortString()).getString(), gatewayInfo.getPos(), tickDelta, Formatting.DARK_GREEN.getColorValue(), currentLine ++);
                 } else {
                     drawString(new TranslatableText("gatewayer.no_exit_portal").getString(), gatewayInfo.getPos(), tickDelta, Formatting.RED.getColorValue(), currentLine ++);
                 }
-                drawString(new TranslatableText(gateway.needsCooldownBeforeTeleporting() ? "gatewayer.cooling_down" : "gatewayer.ready_to_teleport").getString(), gatewayInfo.getPos(), tickDelta, gateway.needsCooldownBeforeTeleporting() ? Formatting.RED.getColorValue() : Formatting.DARK_GREEN.getColorValue(), currentLine ++);
-
-                if (tag.contains("ExactTeleport") && tag.get("ExactTeleport").toString().equals("1b")) {
+                if (gateway.needsCooldownBeforeTeleporting()) {
+                    drawString(new TranslatableText("gatewayer.cooling_down", teleportCooldown).getString(), gatewayInfo.getPos(), tickDelta, gateway.needsCooldownBeforeTeleporting() ? Formatting.RED.getColorValue() : Formatting.DARK_GREEN.getColorValue(), currentLine ++);
+                } else {
+                    drawString(new TranslatableText("gatewayer.ready_to_teleport").getString(), gatewayInfo.getPos(), tickDelta, gateway.needsCooldownBeforeTeleporting() ? Formatting.RED.getColorValue() : Formatting.DARK_GREEN.getColorValue(), currentLine++);
+                }
+                if (exactTeleport) {
                     drawString(new TranslatableText("gatewayer.exact_teleport").getString(), gatewayInfo.getPos(), tickDelta, Formatting.YELLOW.getColorValue(), currentLine ++);
                 }
             } else {
