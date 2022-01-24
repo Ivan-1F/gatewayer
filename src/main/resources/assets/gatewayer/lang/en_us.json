@@ -6,7 +6,7 @@
 	"gatewayer.entity_exit_position": "Entities will exit at %s",
 	"gatewayer.exit_portal": "Exit portal: %s",
 	"gatewayer.no_exit_portal": "No exit portal yet",
-	"gatewayer.cooling_down": "Cooling down...",
+	"gatewayer.cooling_down": "Cooling down... %d",
 	"gatewayer.ready_to_teleport": "Ready to teleport",
 	"gatewayer.exact_teleport": "Exact Teleport"
 }

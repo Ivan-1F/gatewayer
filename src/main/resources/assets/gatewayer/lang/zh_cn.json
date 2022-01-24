@@ -6,7 +6,7 @@
 	"gatewayer.entity_exit_position": "实体将在 %s 退出",
 	"gatewayer.exit_portal": "出口折越门 %s",
 	"gatewayer.no_exit_portal": "没有出口折越门",
-	"gatewayer.cooling_down": "正在冷却",
+	"gatewayer.cooling_down": "正在冷却 %d",
 	"gatewayer.ready_to_teleport": "允许传送",
 	"gatewayer.exact_teleport": "准确传送"
 }
