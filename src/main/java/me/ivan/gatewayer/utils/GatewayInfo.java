@@ -72,7 +72,7 @@ public class GatewayInfo {
         int y = pos.getY();
         int z = pos.getZ();
 
-        for (int i = 255; i >= 0; i--) {
+        for (int i = 319; i >= -64; i--) {
             for (int j = x - 5; j <= x + 5; j++) {
                 for (int k = z - 5; k <= z + 5; k++) {
                     BlockPos pos = new BlockPos(j, i, k);

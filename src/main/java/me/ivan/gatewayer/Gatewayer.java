@@ -96,7 +96,7 @@ public class Gatewayer {
 
             // Draw lines
 //            drawBoxSides(gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, new Color(176, 93, 255, 50), 5, camera);
-            drawBox(stack, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, 0.5F, 0.2F, 0.78F, 1, camera);
+            drawBox(stack, gatewayPos.getX() + 5 + 1, -64, gatewayPos.getZ() + 5 + 1, gatewayPos.getX() - 5, 319, gatewayPos.getZ() - 5, 0.5F, 0.2F, 0.78F, 1, camera);
 //            drawBoxOutlined(gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, new Color(128, 56, 201, 255), 5, camera);
             drawBox(stack, entityExitPos.getX(), entityExitPos.getY(), entityExitPos.getZ(), entityExitPos.getX() + 1, entityExitPos.getY() + 1, entityExitPos.getZ() + 1, 0F, 0.63F, 0.9F, 1, camera);
 //            drawBoxOutlined(entityExitPos.getX(), entityExitPos.getY(), entityExitPos.getZ(), entityExitPos.getX() + 1, entityExitPos.getY() + 1, entityExitPos.getZ() + 1, new Color(0, 162, 232, 255), 5, camera);
@@ -106,7 +106,7 @@ public class Gatewayer {
     public static void drawBox(MatrixStack stack, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, float red, float green, float blue, float alpha, Camera camera) {
         stack.push();
         stack.translate(-camera.getPos().x, -camera.getPos().y, -camera.getPos().z);
-        final Matrix4f model = stack.peek().getModel();
+        final Matrix4f model = stack.peek().getPositionMatrix();
 
         final Tessellator tess = Tessellator.getInstance();
         final BufferBuilder buffer = tess.getBuffer();
@@ -214,7 +214,7 @@ public class Gatewayer {
             MatrixStack matrixStack = RenderSystem.getModelViewStack();
             matrixStack.push();
             matrixStack.translate((float) (x - camX), (float) (y - camY), (float) (z - camZ));
-            matrixStack.method_34425(new Matrix4f(camera.getRotation()));
+            matrixStack.multiplyPositionMatrix(new Matrix4f(camera.getRotation()));
             matrixStack.scale(FONT_SIZE, -FONT_SIZE, FONT_SIZE);
             RenderSystem.enableTexture();
             RenderSystem.disableDepthTest();  // visibleThroughObjects

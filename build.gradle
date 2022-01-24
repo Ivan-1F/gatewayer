@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -29,6 +29,10 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/gatewayer.accesswidener")
 }
 
 tasks.withType(JavaCompile).configureEach {
