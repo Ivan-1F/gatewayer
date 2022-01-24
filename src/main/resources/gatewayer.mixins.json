@@ -4,6 +4,7 @@
   "package": "me.ivan.gatewayer.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "GameRendererMixin"
   ],
   "client": [
     "AbstractBlockStateMixin",
