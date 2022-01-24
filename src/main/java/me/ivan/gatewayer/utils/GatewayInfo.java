@@ -57,7 +57,7 @@ public class GatewayInfo {
 
     public boolean hasBlockEntity() {
         if (!this.isEnabled()) return false;
-        return this.getBlock().hasBlockEntity();
+        return this.getWorld().getBlockEntity(this.getPos()) != null;
     }
 
     public EndGatewayBlockEntity getBlockEntity() {
