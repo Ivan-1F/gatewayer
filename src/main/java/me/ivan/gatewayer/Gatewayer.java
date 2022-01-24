@@ -66,7 +66,7 @@ public class Gatewayer {
             GlStateManager.enableBlend();
 
             // Draw lines
-            drawBoxSides(gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, new Color(176, 93, 255, 50), 5, camera);
+//            drawBoxSides(gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, new Color(176, 93, 255, 50), 5, camera);
             drawBoxOutlined(gatewayPos.getX() + 5 + 1, 0, gatewayPos.getZ() + 5 + 1, gatewayPos.getX() - 5, 255, gatewayPos.getZ() - 5, new Color(128, 56, 201, 255), 5, camera);
             drawBoxOutlined(entityExitPos.getX(), entityExitPos.getY(), entityExitPos.getZ(), entityExitPos.getX() + 1, entityExitPos.getY() + 1, entityExitPos.getZ() + 1, new Color(0, 162, 232, 255), 5, camera);
 
@@ -176,13 +176,11 @@ public class Gatewayer {
     {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = client.gameRenderer.getCamera();
-        if (camera.isReady() && client.getEntityRenderManager().gameOptions != null && client.player != null)
-        {
+        if (camera.isReady() && client.getEntityRenderManager().gameOptions != null && client.player != null) {
             double x = (double)pos.getX() + 0.5D;
             double y = (double)pos.getY() + 0.5D;
             double z = (double)pos.getZ() + 0.5D;
-            if (client.player.squaredDistanceTo(x, y, z) > MAX_RENDER_DISTANCE * MAX_RENDER_DISTANCE)
-            {
+            if (client.player.squaredDistanceTo(x, y, z) > MAX_RENDER_DISTANCE * MAX_RENDER_DISTANCE) {
                 return;
             }
             double camX = camera.getPos().x;
